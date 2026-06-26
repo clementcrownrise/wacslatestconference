@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WACS Conference Registration Portal">
+  <title>Dashboard | WACS Conference</title>
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="{% url 'dashboard' %}" aria-label="adminHMD dashboard">
+          <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
+          <span class="brand-copy">
+            <span class="brand-title">WACS Conference</span>
+            <span class="brand-subtitle">My Dashboard</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link 
+           {%  if request.resolver_match.url_name == 'dashboard' %}
+        active
+        {% endif %}" href="{% url 'dashboard' %}" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">My Dashboard</span>
+        </a>
+        
+        <a class="nav-link
+        {%  if request.resolver_match.url_name == 'myconferences' %}
+        active
+        {% endif %}
+        " href="{% url 'myconferences' %}">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">My  Conferences</span>
+        </a>
+
+          <a class="nav-link
+          {%  if request.resolver_match.url_name == '#' %}
+        active
+        {% endif %}
+          " href="#">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">My  Payments</span>
+        </a>
+        
+       
+      </nav>
+
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">System running smoothly</span>
+      </div>
+    </aside>

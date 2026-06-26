@@ -1,0 +1,104 @@
+{% load static %}
+
+{% include 'includes/aside.html' %}
+{% include 'includes/navigation.html' %}
+
+      <main class="dashboard-content">
+   
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Overview</p>
+                <h1 class="h3 mb-1">Dashboard</h1>
+                <p class="text-muted mb-0">Below is a list of avaiable conference(s), 
+                  please click on a conference
+                  to register for it. 
+                </p>
+        
+              </div>
+              
+            </div>
+            
+            <div class="heading-actions">
+              
+              </div>
+          </div>
+                   {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+          <section class="panel mt-3">
+            <div class="panel-header">
+        
+              <div>
+                <h2 class="h5 mb-1 section-title"><i class="bi bi-people" aria-hidden="true"></i>
+                  <span>Available Conference(s)</span></h2>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead><tr><th scope="col">Conference Name</th>
+                  <th scope="col">Conference Start Date</th>
+                  <th scope="col">Conference End Date</th>
+                  <th scope="col">Early Bird Registration Fee</th>
+                  <th scope="col">Late/Onsite Registration Fee</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="text-end">Action</th></tr></thead>
+                <tbody>
+              
+                  {% for availableconference in conferences %}
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                      
+                        <div>
+                          <p class="fw-semibold mb-0">{{ availableconference.name }}</p>
+                          
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ availableconference.conferencestartdate }}</td>
+                       <td>{{ availableconference.conferenceenddate }}</td>
+                    <td>{{ availableconference.normalregistration_fee}}</td>
+                    <td>
+                      {{ availableconference.lateregistration_fee}}</span></td>
+                    
+                    <td>
+                     {% if availableconference.conferencestartdate >= today %}
+                        <span class="badge text-bg-success">Registration Ongoing</span>
+                        {% else %}
+                        <span class="badge text-bg-danger">Registration Closed</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-end">
+                      {% if availableconference.closing_date < today %}
+                        <span class="badge text-bg-danger">Registration Closed</span>
+
+                      {% else %}
+                    <a class="btn btn-light btn-sm"
+                       href="{% url 'registration' availableconference.id  %}">Register</a>
+                      {% endif %}
+
+                      
+                      
+                      
+                      </td>
+                  </tr>
+
+                  {% empty%}
+                  <h3>No available Conference</h3>
+                  {% endfor %}
+              
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+{% include 'includes/footer.html' %}

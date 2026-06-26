@@ -1,0 +1,48 @@
+<img src="https://wacscoac.com/images/logo.png" alt="">
+<link href="https://jsdelivr.net" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<h2>Dear {{ user.first_name }},</h2>
+
+<h3>Your registration for <strong>{{ conference.name }}</strong> was successful.</h3>
+ <table class="table" width="600">
+    
+    <tr>
+        <td><b>Firstname</b></td>
+         <td>{{user.first_name}}</td>
+    </tr>
+     <tr>
+        <td><b>Lastname</b></td>
+         <td>{{user.last_name}}</td>
+    </tr>
+    <tr>
+      <td><b>Conference Start Date</b></td>
+      <td>{{ conference.conferencestartdate }}</td>
+    </tr>
+     <tr>
+      <td><b>Conference End Date</b></td>
+      <td>{{ conference.conferenceenddate }}</td>
+    </tr>
+        <tr>
+        <td><b>Conference Fee</b></td>
+         <td><p>Early Bird: {{ conference.normalregistration_fee }}USD</p> 
+        <p>Late Registration : {{ conference.lateregistration_fee }}USD</p>
+        </td>
+    </tr>
+    <tr>
+        <td><b>Payment Status</b></td>
+         <td>Pending</td>
+    </tr>
+     <tr>
+        <td><b>Conference Venue</b></td>
+         <td>{{conference.venue}}</td>
+    </tr>
+
+ </table>
+<p>Congratulations, you have registered for the {{conference.name}}, kindly note that you 
+   will be notified when the payment platform becomes active, you can use this email as an 
+   evidence of your registration. 
+</p>
+
+
+<p>Thank you.</p>
+<p>WACS Conference Portal</p>

@@ -1,0 +1,72 @@
+{% load static %}
+
+{% include 'includes/aside.html' %}
+{% include 'includes/navigation.html' %}
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1"></p>
+                <h2 class="h3 mb-1">My Conference(s) </h2>
+                <i>Conference(s) you have registered for</i>
+                
+              </div>
+            </div>
+           </div>
+
+
+          <section class="panel mt-3">
+            <div class="panel-header">
+                
+              <div>
+  
+
+
+              </div>
+            </div>
+             <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead><tr><th scope="col">Conference Name</th>
+                   <th scope="col">Conference Start Date</th>
+                  <th scope="col">Conference End Date</th>
+                  <th scope="col">Early Bird Registration Fee</th>
+                  <th scope="col">Late/Onsite Registration Fee</th>
+                  <th scope="col" class="text-end">Action</th></tr></thead>
+                <tbody>
+              
+                  {% for availableconference in conferences %}
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                      
+                        <div>
+                          <p class="fw-semibold mb-0">{{ availableconference.conferencename }}</p>
+                          
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ availableconference.conferencename.conferencestartdate }}</td>
+                    <td>{{ availableconference.conferencename.conferenceenddate }}</td>
+                    <td>{{ availableconference.conferencename.normalregistration_fee }}</td>
+                    <td>{{ availableconference.conferencename.lateregistration_fee }}</td>
+                   
+                      
+                
+                    <td class="text-end"><a class="btn btn-light btn-sm"
+                       href="{% url 'myconferencedetails' availableconference.id  %}">View</a></td>
+                  </tr>
+
+                  {% empty%}
+                  <h3>You have not registered for any conference</h3>
+                  {% endfor %}
+              
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+{% include 'includes/footer.html' %}

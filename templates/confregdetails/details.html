@@ -1,0 +1,89 @@
+{% load static %}
+
+{% include 'includes/aside.html' %}
+{% include 'includes/navigation.html' %}
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1"></p>
+                <h2 class="h3 mb-1">You are viewing details for: <b>{{ details.conferencename }}</b> </h2>
+                <i>You registered for this conference on {{ details.created_at }}</i>
+                
+              </div>
+            </div>
+           </div>
+
+
+          <section class="panel mt-3">
+            <div class="panel-header">
+                
+              <div>
+  
+
+
+              </div>
+            </div>
+             <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td><b>Gender</b> </td>
+                    <td>{{ details.gender }}</td>
+                </tr>
+                 <tr>
+                    <td><b>Country</b> </td>
+                    <td>{{ details.country }}</td>
+                </tr>
+                <tr >
+                    <td><b>Institution Name</b></td>
+                    <td>{{ details.institutionName }}</td>
+                </tr>
+                   <tr>
+                    <td><b>Institution Name</b></td>
+                    <td>{{ details.faculty }}</td>
+                </tr>
+                   <tr>
+                    <td><b>Subspecialty Name</b></td>
+                    <td>{{ details.subspecialty }}</td>
+                </tr>
+                 <tr>
+                    <td><b>Are you a Fellow of WACS?</b></td>
+                    <td>{{ details.wacsfellow }}</td>
+                </tr>
+                 <tr>
+                    <td><b>Accompanying Person(s)</b></td>
+                    <td>{{ details.accompany }}</td>
+                </tr>
+                
+                 <tr>
+                    <td><b>Registration Date</b> </td>
+                    <td>{{ details.created_at }}</td>
+                </tr>
+                  <tr>
+                    <td><b>Registration Fee</b> </td>
+                    <td>
+                    {% if details.created_at < details.conferencename.lateregistration_start_date  %}  
+                    
+                    {{ details.conferencename.normalregistration_fee }}
+
+                    {% else %}
+
+                    {{ details.conferencename.lateregistration_fee }}
+
+                    {% endif %}
+                    </td>
+                </tr>
+                
+            </table>
+            <button class="btn btn-primary" onclick="window.print()">Print</button>
+                
+            
+
+            </div>
+          </section>
+        </div>
+      </main>
+{% include 'includes/footer.html' %}

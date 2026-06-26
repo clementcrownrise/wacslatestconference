@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WACS">
+  <title>Login | WACS Conference</title>
+
+  <link rel="stylesheet" href="{%  static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{%  static 'bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" href="{%  static 'css/style.css' %}">
+  <style type="text/css">
+    .gt_selector{padding:4px;border:  solid 1px gray; width: 200px;} 
+  </style>
+</head>
+
+<body class="auth-body">
+  <button class="icon-button theme-toggle auth-theme-toggle" type="button" 
+  data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+    <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+  </button>
+  <main class="auth-page">
+     <div class="auth-visual"><img src="https://wacscoac.com/images/logo.png" width="90px"
+        alt="logo"></div>
+        <div class="gtranslate_wrapper">Change Language </div>
+<script>window.gtranslateSettings = {"default_language":"en","languages":["en","fr","pt"],"wrapper_selector":".gtranslate_wrapper"}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <section class="auth-card">
+      
+      <a class="auth-brand" href="#"><span class="brand-icon">
+        <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span><span>
+          <h4>WACS Conference Login</h4>
+          </span></a>
+     
+      <form class="needs-validation" novalidate method="POST" action="{% url 'login' %}">
+        {% include 'includes/alerts.html' %}
+{% csrf_token %}
+        <div class="mb-4">
+          <h1 class="h3 mb-1">Login</h1>
+          <p class="text-muted mb-0">Sign in to your account.</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="loginEmail">Email address</label>
+          <input class="form-control" 
+          id="loginEmail" type="email" name="email"  required>
+          
+          <div class="invalid-feedback">Enter a valid email.</div></div>
+        <div class="mb-3"><div class="d-flex justify-content-between">
+
+
+
+          <label class="form-label" for="loginPassword">Password</label>
+
+
+          <a class="small fw-semibold" href="{% url 'forgotPassword' %}">Forgot?</a></div>
+          
+          <input class="form-control" id="loginPassword" type="password" 
+          name="password" minlength="6" required><div class="invalid-feedback">
+            Password must be at least 6 characters.</div></div>
+        <div class="form-check mb-4">
+       
+          <label class="form-check-label"
+           for="rememberMe">Remember me</label></div>
+
+
+        <button class="btn btn-primary w-100" type="submit">
+          <i class="bi bi-box-arrow-in-right" aria-hidden="true">
+
+        </i> Sign In</button>
+      </form>
+      
+      <div class="auth-footer">New here? <a href="{% url 'register' %}">Create an account</a></div>
+    </section>
+  </main>
+
+  <script src="{%  static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{%  static 'js/main.js' %}"></script>
+</body>
+</html>
