@@ -29,7 +29,10 @@ SECRET_KEY = "test-secret-key-6#)s#^3!y7_u*!@=i74hwdbvx43knwu&a*xk8#419jv2#9gcuh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+      "https://conferenceregistrationportal-production.up.railway.app",
+      "https://conference.wacsabstracts.org",
+]
 
 
 # Application definition
@@ -57,6 +60,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://conferenceregistrationportal-production.up.railway.app",
+    "https://conference.wacsabstracts.org",
+]
+
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
