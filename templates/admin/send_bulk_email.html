@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h2>Send Bulk Email</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {% for registration in registrations %}
+        <input type="hidden"
+               name="_selected_action"
+               value="{{ registration.pk }}">
+    {% endfor %}
+
+    <input type="hidden"
+           name="action"
+           value="send_bulk_email">
+
+    <label>Subject</label>
+
+    <input
+        type="text"
+        name="subject"
+        style="width:100%;">
+
+    <br><br>
+
+    <label>Message</label>
+
+    <textarea
+        name="message"
+        rows="15"
+        style="width:100%;"></textarea>
+
+    <br><br>
+
+    <input
+        type="hidden"
+        name="apply"
+        value="1">
+
+    <button type="submit"
+            class="default">
+        Send Email
+    </button>
+
+</form>
+
+{% endblock %}

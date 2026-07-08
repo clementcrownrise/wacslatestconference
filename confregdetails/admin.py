@@ -6,6 +6,9 @@ from conferencename.models import Conferencename
 from django.http import HttpResponse
 from openpyxl import Workbook
 
+from django.shortcuts import render
+from django.core.mail import EmailMessage
+
 
 @admin.action(description="Export selected registrations to Excel")
 def export_to_excel(modeladmin, request, queryset):
@@ -55,6 +58,39 @@ def export_to_excel(modeladmin, request, queryset):
     return response
 
 
+@admin.action(description="Send Email to Selected Registrants")
+def send_bulk_email(self, request, queryset):
+
+        if 'apply' in request.POST:
+
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+
+            for registration in queryset:
+
+                email = EmailMessage(
+                    subject,
+                    message,
+                    to=[registration.user.email]
+                )
+
+                email.content_subtype = "html"
+                email.send()
+
+            self.message_user(
+                request,
+                f"Email sent to {queryset.count()} registrants."
+            )
+
+            return
+
+        return render(
+            request,
+            "admin/send_bulk_email.html",
+            context={
+                "registrations": queryset,
+            },
+        )
 
 
 class ConferenceregdetilAdmin(admin.ModelAdmin):
@@ -67,7 +103,8 @@ class ConferenceregdetilAdmin(admin.ModelAdmin):
         'faculty',
         'country',
                         )
-        actions = [export_to_excel]
+        actions = [export_to_excel,send_bulk_email]
+        #actions = []
 
         
         
@@ -88,8 +125,10 @@ class ConferenceregdetilAdmin(admin.ModelAdmin):
 
 
 
+
+
+
+
 admin.site.register(Confregdetail, ConferenceregdetilAdmin)
-
-
 
 

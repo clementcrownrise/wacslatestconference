@@ -77,7 +77,7 @@
                       {% endif %}
                     </td>
                     <td class="text-end">
-                      {% if availableconference.closing_date < today %}
+                      {% if availableconference.conferencestartdate < today %}
                         <span class="badge text-bg-danger">Registration Closed</span>
 
                       {% else %}
