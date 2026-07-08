@@ -1,1 +1,1 @@
-web: gunicorn conference.wsgi
+web: gunicorn conference.wsgi:application
