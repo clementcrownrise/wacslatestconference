@@ -29,10 +29,7 @@ SECRET_KEY = "test-secret-key-6#)s#^3!y7_u*!@=i74hwdbvx43knwu&a*xk8#419jv2#9gcuh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = [
-      "https://conferenceregistrationportal-production.up.railway.app",
-      "https://conference.wacsabstracts.org",
-]
+
 
 
 # Application definition
@@ -95,6 +92,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 
 if DEBUG:
+    ALLOWED_HOSTS = ["*"]
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -102,6 +100,11 @@ if DEBUG:
         }
     }
 else:
+    ALLOWED_HOSTS = [
+        "*",
+     "https://conferenceregistrationportal-production.up.railway.app",
+      "https://conference.wacsabstracts.org",
+    ]
     # Automatically parses the DATABASE_URL environment variable provided by your hosting platform
     DATABASES = {
         'default': dj_database_url.config(
