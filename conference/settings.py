@@ -18,16 +18,16 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1#z6kb4o-9nmojdd0ovu6003+h)f0=5%n_jxq5^bx!t!q*uvq@'
 SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,13 +82,22 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    # Automatically parses the DATABASE_URL environment variable provided by your hosting platform
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -150,12 +159,21 @@ MESSAGE_TAGS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_PORT = 2525          # Integer, not a string
-EMAIL_HOST_USER = '8c406525ffd3ad'
-EMAIL_HOST_PASSWORD = '9fd4396d7c0752'
+if DEBUG:
+        EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+        EMAIL_PORT = 2525          # Integer, not a string
+        EMAIL_HOST_USER = '8c406525ffd3ad'
+        EMAIL_HOST_PASSWORD = '9fd4396d7c0752'
 
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+        EMAIL_USE_TLS = True
+        EMAIL_USE_SSL = False
 
-DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+        DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+else: 
+        EMAIL_HOST = os.environ.get('EMAIL_HOST')
+        EMAIL_PORT = os.environ.get('EMAIL_PORT')   # Integer, not a string
+        EMAIL_HOST_USER =os.environ.get('EMAIL_HOST_USER')
+        EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+        EMAIL_USE_TLS = True
+        EMAIL_USE_SSL = False
