@@ -9,6 +9,7 @@ from .models import Confregdetail
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+import logging
 
 # Create your views here.
 @login_required
@@ -46,7 +47,10 @@ def registration(request, id):
                 )
 
                 email.content_subtype = 'html'
-                email.send(fail_silently=True)
+                try:
+                    email.send(fail_silently=True)
+                except Exception as e:
+                    logger.exception("Failed to send conference registration mail: %s", e)
 
                 messages.success(
                     request, 
