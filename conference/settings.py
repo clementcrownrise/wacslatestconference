@@ -30,7 +30,7 @@ SECRET_KEY = "test-secret-key-6#)s#^3!y7_u*!@=i74hwdbvx43knwu&a*xk8#419jv2#9gcuh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 
-
+print("DATABASE_URL =", os.environ.get("DATABASE_URL"))
 
 
 # Application definition
@@ -103,8 +103,8 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         "*",
-       "https://wacslatestconference-production.up.railway.app",
-      "https://conference.wacsabstracts.org",
+       "wacslatestconference-production.up.railway.app",
+      "conference.wacsabstracts.org",
     ]
     # Automatically parses the DATABASE_URL environment variable provided by your hosting platform
     DATABASES = {
