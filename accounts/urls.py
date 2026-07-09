@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views 
-from .views import create_super_admin
+#from .views import create_super_admin
 
 urlpatterns = [
     path('', views.login, name='login'),
