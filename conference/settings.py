@@ -14,18 +14,17 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
-load_dotenv()
 #load_dotenv(BASE_DIR / ".env")
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(BASE_DIR / ".env")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "test-secret-key-6#)s#^3!y7_u*!@=i74hwdbvx43knwu&a*xk8#419jv2#9gcuh"
+SECRET_KEY = os.getenv("SECRET_KEY")
 #SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
@@ -65,7 +64,11 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 ROOT_URLCONF = 'conference.urls'
 
@@ -147,7 +150,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -183,7 +186,7 @@ if DEBUG:
         DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 else: 
         EMAIL_HOST = os.environ.get('EMAIL_HOST')
-        EMAIL_PORT = os.environ.get('EMAIL_PORT')   # Integer, not a string
+        EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 2525))
         EMAIL_HOST_USER =os.environ.get('EMAIL_HOST_USER')
         EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
