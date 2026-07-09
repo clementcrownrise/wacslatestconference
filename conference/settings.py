@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://conferenceregistrationportal-production.up.railway.app",
+    "https://wacslatestconference-production.up.railway.app",
     "https://conference.wacsabstracts.org",
 ]
 
@@ -103,7 +103,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         "*",
-     "https://conferenceregistrationportal-production.up.railway.app",
+       "https://wacslatestconference-production.up.railway.app",
       "https://conference.wacsabstracts.org",
     ]
     # Automatically parses the DATABASE_URL environment variable provided by your hosting platform
