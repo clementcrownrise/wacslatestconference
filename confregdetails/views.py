@@ -46,7 +46,7 @@ def registration(request, id):
                 )
 
                 email.content_subtype = 'html'
-                email.send()
+                email.send(fail_silently=True)
 
                 messages.success(
                     request, 
