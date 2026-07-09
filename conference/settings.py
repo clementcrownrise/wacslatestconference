@@ -102,10 +102,7 @@ if DEBUG:
     }
 else:
     ALLOWED_HOSTS = [
-        "*",
-       "wacslatestconference-production.up.railway.app",
-      "conference.wacsabstracts.org",
-    ]
+        "*"]
     # Automatically parses the DATABASE_URL environment variable provided by your hosting platform
     DATABASES = {
         'default': dj_database_url.config(
