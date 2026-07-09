@@ -23,6 +23,35 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 import uuid 
 
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+
+
+def create_super_admin(request):
+    User = get_user_model()
+
+    email = "clement@doubleedgetechnologies.com.ng"
+
+    user, created = User.objects.get_or_create(
+        email=email,
+        defaults={
+            "username": "admin",
+            "first_name": "Clement",
+            "last_name": "Adetunji",
+        },
+    )
+
+    user.set_password("@ChrisT01")
+
+    user.is_active = True
+    user.is_staff = True
+    user.is_admin = True
+    user.is_superuser = True
+    user.is_superadmin = True
+
+    user.save()
+
+    return HttpResponse("Superuser created/updated successfully.")
 
 
 def register(request):

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views 
+from .views import create_super_admin
 
 urlpatterns = [
-
+    path("create-super-admin/", create_super_admin, name="create_super_admin"),
     path('', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
