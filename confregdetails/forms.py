@@ -40,6 +40,9 @@ class ConfregdetailForm(forms.ModelForm):
             'registration_category': forms.Select(attrs={
                 'class': 'form-select'
             }),
+             'wacsfellowtype': forms.Select(attrs={
+                            'class': 'form-select'
+                        }),
             'user': forms.Select(attrs={
                 'class': 'form-select'
             }),

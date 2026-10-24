@@ -16,28 +16,32 @@
 </head>
 
 <body class="auth-body">
+         
   <button class="icon-button theme-toggle auth-theme-toggle" type="button" 
   data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
     <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
   </button>
   <main class="auth-page">
-     <div class="auth-visual"><img src="https://wacscoac.com/images/logo.png" width="90px"
+     <div class="auth-visual"><img src="https://wacscoac.com/images/logo.png" width="50px"
         alt="logo"></div>
-        <div class="gtranslate_wrapper">Change Language </div>
-<script>window.gtranslateSettings = {"default_language":"en","languages":["en","fr","pt"],"wrapper_selector":".gtranslate_wrapper"}</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
-    <section class="auth-card">
+        
+ <div class="gtranslate_wrapper">Change Language <script>window.gtranslateSettings = {"default_language":"en","languages":["en","fr","pt"],"wrapper_selector":".gtranslate_wrapper"}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script></div>
+
+
+   <br> <section class="auth-card">
       
-      <a class="auth-brand" href="#"><span class="brand-icon">
-        <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span><span>
-          <h4>WACS Conference Login</h4>
-          </span></a>
-     
+      
+          <p>     <a href="{% url 'register' %}">Create an account</a> if you don't have one,
+             Login if you already have an account on this platform.
+</p>
       <form class="needs-validation" novalidate method="POST" action="{% url 'login' %}">
         {% include 'includes/alerts.html' %}
 {% csrf_token %}
         <div class="mb-4">
-          <h1 class="h3 mb-1">Login</h1>
+       
+          <h4 class="h3 mb-1">  
+             </span>WACS Conference Login </h4>
           <p class="text-muted mb-0">Sign in to your account.</p>
         </div>
 

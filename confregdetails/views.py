@@ -9,7 +9,6 @@ from .models import Confregdetail
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-import logging
 
 # Create your views here.
 @login_required
@@ -34,29 +33,26 @@ def registration(request, id):
             else:
 
                 registration.save()
-                #i will send a mail here
+                    #i will send a mail here
                 message = render_to_string('emails/conference_registration.html',
-                                           {
-                                               'user':request.user,
-                                               'conference':conference, 
-                                           })
+                                            {
+                                                'user':request.user,
+                                                'conference':conference, 
+                                            })
                 email =EmailMessage(
-                    'WACS Conference Registration Notification',
-                    message,
-                    to=[request.user.email]
-                )
+                        'WACS Conference Registration Notification',
+                        message,
+                        to=[request.user.email]
+                    )
 
                 email.content_subtype = 'html'
-                try:
-                    email.send(fail_silently=True)
-                except Exception as e:
-                    logger.exception("Failed to send conference registration mail: %s", e)
+                email.send(fail_silently=True)
 
                 messages.success(
-                    request, 
-                    "Your conference registration was saved, please check your mail for more details!"
-                )
-            return redirect('dashboard')
+                        request, 
+                        "Your conference registration was saved, please check your mail for more details!, or follow the payment instructions below"
+                    )
+                return redirect('myconferencedetails', registration.id)
         
         else:
             print(form.errors)

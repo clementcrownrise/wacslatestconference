@@ -7,13 +7,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const fellow = document.getElementById("id_wacsfellow");
     const nonFellowDiv = document.getElementById("nonFellowDiv");
+    const fellowDiv = document.getElementById("FellowDiv");
 
     function toggleCategory() {
         if (fellow.value === "No") {
             nonFellowDiv.style.display = "block";
-           // fellow.style.display="none";
+            fellowDiv.style.display = "none";
+
+        }
+           else if (fellow.value === "Yes")
+            {
+            fellowDiv.style.display = "block";
+            nonFellowDiv.style.display = "none";
+
         } else {
             nonFellowDiv.style.display = "none";
+            fellowDiv.style.display = "none";
         }
     }
 
@@ -98,8 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     {{ form.wacsfellow }}
 
 
-            <div class="mb-3" id="nonFellowDiv" style="display:none;">
+            <div class="mb-3" id="nonFellowDiv" style="display:none; margin-top: 15px;">
         {{ form.registration_category }}
+        </div>
+
+           <div class="mb-3" id="FellowDiv" style="display:none; margin-top: 15px;">
+        {{ form.wacsfellowtype }}
         </div>
 
                                     {% if form.wacsfellow.errors %}

@@ -15,6 +15,17 @@ REG_CAT = [
     ('Trainee', 'Trainee'),
         ('Exhibitor', 'Exhibitor'),
         ('Others', 'Others'),
+        ('New Fellowship Graduate', 'New Fellowship Graduate'),
+        ('New Membership Graduate', 'New Membership Graduate'),
+        ('New Diplomate Graduate', 'New Diplomate Graduate'),
+        ('New Post Fellowship Graduate', 'New Post Fellowship Graduate'),
+]
+
+FELLOWTYPE_CHOICES = [
+    ('', 'Select Fellow Type'),
+    ('Council Member', 'Council Member'),
+    ('F&GPC (AL)', 'F&GPC (AL)'),
+    ('Not Applicable', 'Not Applicable'),
 ]
 
 Accom = [
@@ -243,7 +254,8 @@ class Confregdetail(models.Model):
     institutionName = models.CharField(max_length=200)
     accompany = models.CharField(max_length=5, choices=Accom)
     wacsfellow = models.CharField(max_length=5, choices=Yes_NO)
-    registration_category = models.CharField(max_length=20, choices=REG_CAT, blank=True, null=True)
+    registration_category = models.CharField(max_length=50, choices=REG_CAT, blank=True, null=True)
+    wacsfellowtype = models.CharField(max_length=200, blank=True, null=True, choices=FELLOWTYPE_CHOICES)
     gender = models.CharField(max_length=7, choices=GENDER)
     subspecialty = models.CharField(max_length=200, choices=SUBSPECIALTY_CHOICES,
                                      blank=True, null=True)
