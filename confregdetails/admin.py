@@ -95,6 +95,7 @@ def send_bulk_email(self, request, queryset):
 
 class ConferenceregdetilAdmin(admin.ModelAdmin):
         list_display=('user_first_name','user_last_name','user','conferencename',
+                      'wacsfellow','registration_category','wacsfellowtype',
                        'faculty', 'subspecialty',
                          'institutionName','country',)
         
@@ -102,6 +103,9 @@ class ConferenceregdetilAdmin(admin.ModelAdmin):
         'conferencename',
         'faculty',
         'country',
+        'wacsfellow',
+        'registration_category',
+        'wacsfellowtype',
                         )
         actions = [export_to_excel,send_bulk_email]
         #actions = []
