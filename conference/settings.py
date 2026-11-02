@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'faculty',
     'conferencename',
     'confregdetails',
+    'paymentinfo',
 ]
 
 MIDDLEWARE = [

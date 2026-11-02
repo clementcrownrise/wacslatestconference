@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('conference-registration/<int:id>/', include('confregdetails.urls')),
+    path('paymentinfo/', include('paymentinfo.urls')),
 ]
 
 if settings.DEBUG:
